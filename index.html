@@ -7,6 +7,17 @@
     <title>Automation Testing Elements</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
+        /* Ensure the body takes full height */
+        body,
+        html {
+            height: 100%;
+            margin: 0;
+        }
+
+        .container {
+            max-width: 1200px;
+        }
+
         .drag-item {
             padding: 10px;
             margin: 5px;
@@ -19,7 +30,7 @@
             border: 2px dashed #ccc;
             padding: 20px;
             margin-top: 20px;
-            height: 150px;
+            height: 250px;
         }
 
         .shadow-dom-container {
@@ -63,11 +74,56 @@
             height: 25px;
         }
 
+        /* Align Movie Cards Properly */
         .movie-container {
             display: flex;
             flex-wrap: wrap;
             gap: 20px;
-            justify-content: space-between;
+            justify-content: space-around;
+        }
+
+        .hurray-message {
+            text-align: center;
+            font-size: 24px;
+            color: green;
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #e0ffe0;
+            border: 2px solid green;
+            border-radius: 5px;
+        }
+
+        .drop-area {
+            border: 2px dashed #ccc;
+            padding: 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .drop-area.hover {
+            background-color: #e0f7fa;
+        }
+
+        .file-list {
+            margin-top: 20px;
+            text-align: left;
+        }
+
+        .file-list p {
+            font-weight: bold;
+        }
+
+        .file-list ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .file-list ul li {
+            background: #e0e0e0;
+            margin: 5px 0;
+            padding: 10px;
+            border-radius: 5px;
         }
 
         .movie-card {
@@ -123,14 +179,71 @@
             height: 200px;
             background-color: lightgray;
         }
-  
+
+        /* Full Height for Sections */
+        .full-height {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .movie-container {
+            flex-grow: 1;
+        }
+
+        /* Modal and Tab fixes */
+        .modal-dialog {
+            max-width: 800px;
+        }
+
+        /* Fixing the iframe container */
+        .iframe-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .movie-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: space-around;
+        }
+
+        /* Full Height for Sections */
+        .full-height {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Movie Table Styles */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table th, table td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        table th {
+            background-color: #f4f4f4;
+        }
     </style>
 </head>
 
 <body>
     <div class="container mt-5">
         <h1>Automation Testing Elements</h1>
-
+        <div class="mb-3">
+            <label for="searchInput" class="form-label">Search Input</label>
+            <input type="search" class="form-control" id="searchInput" required>
+            <div class="invalid-feedback">Please enter a search term.</div>
+        </div>
         <!-- Form with Validation and Progress Bar -->
         <form id="testForm" novalidate>
             <div class="mb-3">
@@ -138,19 +251,16 @@
                 <input type="email" class="form-control" id="email" required>
                 <div class="invalid-feedback">Please provide a valid email address.</div>
             </div>
-
             <div class="mb-3">
                 <label for="password" class="form-label">Password</label>
                 <input type="password" class="form-control" id="password" required minlength="6">
                 <div class="invalid-feedback">Password must be at least 6 characters long.</div>
             </div>
-
             <div class="mb-3">
                 <label for="slider" class="form-label">Slider</label>
                 <input type="range" class="form-range" id="slider" min="0" max="100">
                 <div class="form-text">Adjust the slider value.</div>
             </div>
-
             <div class="mb-3">
                 <label class="form-label">Radio Buttons</label>
                 <div>
@@ -163,7 +273,6 @@
                 </div>
                 <div class="invalid-feedback">Please select an option.</div>
             </div>
-
             <div class="mb-3">
                 <label for="multiSelect" class="form-label">Multi-Select</label>
                 <select multiple class="form-select" id="multiSelect" required>
@@ -174,7 +283,6 @@
                 </select>
                 <div class="invalid-feedback">Please select at least one option.</div>
             </div>
-
             <div class="mb-3">
                 <label for="singleSelect" class="form-label">Single Select</label>
                 <select class="form-select" id="singleSelect" required>
@@ -185,19 +293,12 @@
                 </select>
                 <div class="invalid-feedback">Please select an option.</div>
             </div>
-
             <div class="mb-3">
                 <label for="fileInput" class="form-label">File Input</label>
                 <input type="file" class="form-control" id="fileInput" required>
                 <div class="invalid-feedback">Please upload a file.</div>
             </div>
-
-            <div class="mb-3">
-                <label for="searchInput" class="form-label">Search Input</label>
-                <input type="search" class="form-control" id="searchInput" required>
-                <div class="invalid-feedback">Please enter a search term.</div>
-            </div>
-
+           
             <div class="form-feedback">
                 <button type="submit" class="btn btn-primary">Submit</button>
             </div>
@@ -206,7 +307,8 @@
             <div class="mt-3">
                 <label for="progressBar" class="form-label">Form Completion Progress</label>
                 <div class="progress">
-                    <div class="progress-bar" id="progressBar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                    <div class="progress-bar" id="progressBar" role="progressbar" aria-valuenow="0" aria-valuemin="0"
+                        aria-valuemax="100"></div>
                 </div>
             </div>
         </form>
@@ -218,34 +320,18 @@
             <div class="drag-item" draggable="true" id="dragItem2">Item 2</div>
             <div class="drag-item" draggable="true" id="dragItem3">Item 3</div>
         </div>
-<!-- Drop Zone -->
-<div class="drop-zone">
-    Drop items here
-</div>
-        <!-- Shadow DOM Example -->
-        <div class="mt-5">
-            <h3>Shadow DOM Example</h3>
-            <div id="shadow-host"></div>
+
+        <!-- Drop Zone -->
+        <div class="drop-zone">
+            Drop items here
         </div>
-       <!-- Example of more Broken Links -->
-       <div class="row mt-5">
-        <div class="col-md-6">
-            <h3>Broken Links List</h3>
-            <ul>
-                <li><a href="https://brokenlink1.com" class="broken-link" target="_blank">Broken Link 1</a></li>
-                <li><a href="https://brokenlink2.com" class="broken-link" target="_blank">Broken Link 2</a></li>
-                <li><a href="https://brokenlink3.com" class="broken-link" target="_blank">Broken Link 3</a></li>
-            </ul>
-        </div>
-    </div>
-</div>
 
         <!-- Modal Popup -->
         <div class="mt-5">
             <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#exampleModal">Open Modal</button>
 
-            <!-- Modal -->
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -253,7 +339,7 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            This is a modal popup example.
+                            Content goes here.
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -263,195 +349,312 @@
                 </div>
             </div>
         </div>
+        <div class="container">
+            <h2>Drag & Drop Your Files Here</h2>
 
-        <!-- Tabs -->
-        <div class="mt-5">
-            <ul class="nav nav-tabs custom-tabs" id="myTab" role="tablist">
-                <li class="nav-item" role="presentation">
-                    <a class="nav-link active" id="home-tab" data-bs-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Home</a>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <a class="nav-link" id="profile-tab" data-bs-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Profile</a>
-                </li>
-            </ul>
-            <div class="tab-content" id="myTabContent">
-                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                    Content for Home tab.
-                </div>
-                <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                    Content for Profile tab.
-                </div>
-            </div>
-        </div>
-    </div>
-
-     <!-- Second Column with Iframes -->
-     <div class="col-md-6">
-        <h2>Embedded Content (iFrame Example)</h2>
-        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="YouTube Video"></iframe>
-
-        <!-- Additional iframe embedded content -->
-        <h2 class="mt-4">Another Embedded Content</h2>
-        <iframe src="https://www.youtube.com/embed/hY7m5jjJ9mM" title="YouTube Video"></iframe>
-    </div>
-
-
-        <h1>Movie List with Infinite Scroll</h1>
-
-        <div class="row">
-            <!-- First Column -->
-            <div class="col-md-6">
-                <h2>Movies</h2>
-                <div class="movie-container" id="movieContainer"></div>
-
-                <!-- Infinite Scroll Container -->
-                <div class="infinite-scroll" id="infiniteScroll">
-                    Loading movies...
-                </div>
+            <!-- Drop area -->
+            <div id="drop-area" class="drop-area">
+                <p>Drag files here or click to select files.</p>
+                <input type="file" id="fileElem" multiple style="display: none;">
+                <button id="browseBtn">Browse Files</button>
             </div>
 
-           
+            <div id="file-list" class="file-list">
+                <!-- Dropped files will be listed here -->
+            </div>
+
         </div>
+        <!-- Movie Container -->
+        <div id="movieContainer" class="movie-container mt-5"></div>
+
+
+
+
+
+        <!-- Movie Table -->
+        <h2>Popular Movies</h2>
+        <table id="movie-table">
+            <thead>
+                <tr>
+                    <th>Poster</th>
+                    <th>Title</th>
+                    <th>Release Date</th>
+                    <th>Overview</th>
+                </tr>
+            </thead>
+            <tbody id="movie-list">
+                <!-- Movie rows will be dynamically inserted here -->
+            </tbody>
+        </table>
+
+
+
+
+
+
+
+
+        <!-- Movie Section -->
+        <div id="movie-section" class="movie-section">
+            <h3>Popular Movies</h3>
+            <div id="movie-list" class="movie-list">
+                <!-- Movie items will be populated here -->
+            </div>
+        </div>
+
     </div>
 
-    <script>
-        // API URL for fetching movies (The Movie Database API)
-        const apiUrl = 'https://api.themoviedb.org/3/movie/popular?api_key=c44e78d7e1a3f1be6a50976972fa9eca&page=1';
-        let page = 1;
-        const movieContainer = document.getElementById('movieContainer');
-        const infiniteScroll = document.getElementById('infiniteScroll');
-
-        // Function to fetch and display movies
-        async function fetchMovies() {
-            const response = await fetch(`https://api.themoviedb.org/3/movie/popular?api_key=c44e78d7e1a3f1be6a50976972fa9eca&page=${page}`);
-            const data = await response.json();
-            const movies = data.results;
-
-            movies.forEach(movie => {
-                const movieCard = document.createElement('div');
-                movieCard.classList.add('movie-card');
-                movieCard.innerHTML = `
-                    <img src="https://image.tmdb.org/t/p/w500/${movie.poster_path}" alt="${movie.title}">
-                    <div class="card-body">
-                        <h5 class="card-title">${movie.title}</h5>
-                        <p class="card-text">${movie.overview.substring(0, 100)}...</p>
-                    </div>
-                `;
-                movieContainer.appendChild(movieCard);
-            });
-
-            page++;
-        }
-
-        // Infinite Scroll functionality
-        const loadMoreMovies = () => {
-            const scrollHeight = infiniteScroll.scrollHeight;
-            const scrollTop = infiniteScroll.scrollTop;
-            const clientHeight = infiniteScroll.clientHeight;
-
-            // Check if we have scrolled to the bottom
-            if (scrollTop + clientHeight >= scrollHeight - 10) {
-                infiniteScroll.innerHTML = 'Loading more movies...';
-                fetchMovies().then(() => {
-                    infiniteScroll.innerHTML = '';
-                });
-            }
-        };
-
-        infiniteScroll.addEventListener('scroll', loadMoreMovies);
-
-        // Initial movie fetch
-        fetchMovies();
-    </script>
-<script>
-    // Drag and Drop functionality
-    const dragItems = document.querySelectorAll('.drag-item');
-    const dropZone = document.querySelector('.drop-zone');
-
-    dragItems.forEach(item => {
-        item.addEventListener('dragstart', (e) => {
-            e.dataTransfer.setData('text', e.target.innerText);
-        });
-    });
-
-    dropZone.addEventListener('dragover', (e) => {
-        e.preventDefault();
-    });
-
-    dropZone.addEventListener('drop', (e) => {
-        e.preventDefault();
-        const data = e.dataTransfer.getData('text');
-        dropZone.innerHTML = 'Dropped: ' + data;
-    });
-</script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // Form Validation and Progress Bar Update
-        const form = document.getElementById('testForm');
-        const progressBar = document.getElementById('progressBar');
+        const movieContainer = document.getElementById('movieContainer'); document.addEventListener('DOMContentLoaded', function () {
+            // Form Validation
+            const form = document.getElementById('testForm');
+            const progressBar = document.getElementById('progressBar');
+            const movieContainer = document.getElementById('movieContainer');
+            const infiniteScroll = document.getElementById('infiniteScroll');
 
-        form.addEventListener('input', updateProgressBar);
-        form.addEventListener('submit', (e) => {
-            e.preventDefault();
-            if (form.checkValidity()) {
-                alert('Form Submitted Successfully!');
-            } else {
-                form.classList.add('was-validated');
-            }
-        });
-
-        function updateProgressBar() {
-            let filledFields = 0;
-            const totalFields = form.querySelectorAll('input, select, textarea').length;
-
-            form.querySelectorAll('input, select, textarea').forEach(input => {
-                if (input.value) {
-                    filledFields++;
+            // Initialize the form validation
+            form.addEventListener('submit', function (e) {
+                e.preventDefault();
+                if (form.checkValidity()) {
+                    form.classList.add('was-validated');
+                    updateProgressBar();
+                } else {
+                    form.classList.add('was-validated');
                 }
             });
 
-            const progress = (filledFields / totalFields) * 100;
-            progressBar.style.width = progress + '%';
-            progressBar.setAttribute('aria-valuenow', progress);
-        }
+            // Update Progress Bar based on form fields validity
+            function updateProgressBar() {
+                const inputs = form.querySelectorAll('input, select');
+                let validCount = 0;
+                inputs.forEach(input => {
+                    if (input.checkValidity()) {
+                        validCount++;
+                    }
+                });
+                const progress = (validCount / inputs.length) * 100;
+                progressBar.style.width = `${progress}%`;
+                progressBar.setAttribute('aria-valuenow', progress);
+            }
 
-        // // Drag and Drop functionality
-        // const dragItems = document.querySelectorAll('.drag-item');
-        // const dropZone = document.createElement('div');
-        // dropZone.classList.add('drop-zone');
-        // dropZone.innerText = 'Drop items here';
-        // document.body.appendChild(dropZone);
+            // Drag and Drop functionality
+            const dragItems = document.querySelectorAll('.drag-item');
+            const dropZone = document.querySelector('.drop-zone');
+            let droppedItemsCount = 0;
 
-        dragItems.forEach(item => {
-            item.addEventListener('dragstart', (e) => {
-                e.dataTransfer.setData('text', e.target.id);
+            dragItems.forEach(item => {
+                item.addEventListener('dragstart', function (e) {
+                    e.dataTransfer.setData('text', e.target.id);
+                });
             });
+
+            dropZone.addEventListener('dragover', function (e) {
+                e.preventDefault();
+                dropZone.style.backgroundColor = '#f0f0f0';
+            });
+
+            dropZone.addEventListener('dragleave', function () {
+                dropZone.style.backgroundColor = '';
+            });
+
+            dropZone.addEventListener('drop', function (e) {
+                e.preventDefault();
+                const data = e.dataTransfer.getData('text');
+                const draggedItem = document.getElementById(data);
+                dropZone.appendChild(draggedItem);
+                dropZone.style.backgroundColor = '';
+                droppedItemsCount++;
+
+                // Check if all items have been dropped
+                if (droppedItemsCount === dragItems.length) {
+                    showHurrayMessage();
+                }
+            });
+
+            // Function to show "Hurray!" message
+            function showHurrayMessage() {
+                const message = document.createElement('div');
+                message.classList.add('hurray-message');
+                message.innerHTML = '<h3>Hurray! You dropped all the draggable items!</h3>';
+                message.style.textAlign = 'center';
+                message.style.fontSize = '24px';
+                message.style.color = 'green';
+                message.style.marginTop = '20px';
+                document.body.appendChild(message);
+            }
+
+            // Infinite Scroll functionality
+            let loading = false;
+            let page = 1;
+
+            function loadMoreItems() {
+                if (loading) return;
+                loading = true;
+                setTimeout(() => {
+                    for (let i = 0; i < 5; i++) {
+                        const movieCard = document.createElement('div');
+                        movieCard.classList.add('movie-card');
+                        movieCard.innerHTML = `
+                    <img src="https://via.placeholder.com/350x200" alt="Movie Poster">
+                    <div class="card-body">
+                        <h5 class="card-title">Movie ${page * 5 + i + 1}</h5>
+                        <p class="card-text">Description of Movie ${page * 5 + i + 1}</p>
+                    </div>
+                `;
+                        movieContainer.appendChild(movieCard);
+                    }
+                    loading = false;
+                    page++;
+                }, 1000);
+            }
+
+            infiniteScroll.addEventListener('scroll', function () {
+                if (infiniteScroll.scrollTop + infiniteScroll.clientHeight >= infiniteScroll.scrollHeight) {
+                    loadMoreItems();
+                }
+            });
+
+            // Initial load
+            loadMoreItems();
+
+            // Modal interaction
+            const modal = new bootstrap.Modal(document.getElementById('exampleModal'));
+            const openModalBtn = document.querySelector('[data-bs-toggle="modal"]');
+            openModalBtn.addEventListener('click', function () {
+                modal.show();
+            });
+
+            // Placeholder for broken links and images
+            document.querySelectorAll('.broken-link').forEach(link => {
+                link.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    alert('This link is broken!');
+                });
+            });
+
+            document.querySelectorAll('.image-placeholder').forEach(placeholder => {
+                placeholder.addEventListener('error', function () {
+                    placeholder.src = 'https://via.placeholder.com/350x200';
+                });
+            });
+
+            // Scroll container for images or content
+            const scrollContainer = document.querySelector('.scroll-container');
+            if (scrollContainer) {
+                let items = '';
+                for (let i = 1; i <= 10; i++) {
+                    items += `<div>Item ${i}</div>`;
+                }
+                scrollContainer.innerHTML = items;
+            }
+        });
+        const dropArea = document.getElementById('drop-area');
+        const fileList = document.getElementById('file-list');
+        const fileElem = document.getElementById('fileElem');
+        const browseBtn = document.getElementById('browseBtn');
+
+        // Trigger file input when "Browse Files" button is clicked
+        browseBtn.addEventListener('click', function () {
+            fileElem.click();
         });
 
-        dropZone.addEventListener('dragover', (e) => {
-            e.preventDefault();
+        // Handle file selection (either drag-and-drop or file dialog)
+        fileElem.addEventListener('change', handleFiles, false);
+
+        // Handle drag-over event
+        dropArea.addEventListener('dragover', function (event) {
+            event.preventDefault();
+            dropArea.classList.add('hover');
         });
 
-        dropZone.addEventListener('drop', (e) => {
-            e.preventDefault();
-            const id = e.dataTransfer.getData('text');
-            const draggedItem = document.getElementById(id);
-            dropZone.appendChild(draggedItem);
+        // Handle drag-leave event
+        dropArea.addEventListener('dragleave', function () {
+            dropArea.classList.remove('hover');
         });
 
-        // Shadow DOM example
-        const shadowHost = document.getElementById('shadow-host');
-        const shadowRoot = shadowHost.attachShadow({ mode: 'open' });
-        shadowRoot.innerHTML = `<div style="color: red;">This is inside Shadow DOM</div>`;
+        // Handle drop event
+        dropArea.addEventListener('drop', function (event) {
+            event.preventDefault();
+            dropArea.classList.remove('hover');
+            const files = event.dataTransfer.files;
+            handleFiles({ target: { files } }); // pass files to the handleFiles function
+        });
+
+        // Function to handle files
+        function handleFiles(event) {
+            const files = event.target.files;
+            if (files.length > 0) {
+                const fileListHTML = document.createElement('ul');
+                for (let i = 0; i < files.length; i++) {
+                    const file = files[i];
+                    const fileItem = document.createElement('li');
+                    fileItem.textContent = file.name;
+                    fileListHTML.appendChild(fileItem);
+                }
+                fileList.innerHTML = ''; // Clear previous list
+                fileList.appendChild(fileListHTML);
+            }
+        }
+        const API_KEY = 'c44e78d7e1a3f1be6a50976972fa9eca'; // Replace with your TMDb API key
+
+
+
+        const movieApiUrl = 'https://api.themoviedb.org/3/movie/popular?api_key=YOUR_API_KEY&language=en-US&page=1';
+
+document.addEventListener('DOMContentLoaded', function () {
+    fetchMovies();
+});
+
+// Function to fetch movie data from the API
+function fetchMovies() {
+    fetch(movieApiUrl)
+        .then(response => response.json())
+        .then(data => {
+            const movieList = data.results;
+            const movieTableBody = document.getElementById('movie-list');
+            movieTableBody.innerHTML = '';  // Clear the table before adding new rows
+
+            // Loop through the movie data and insert rows into the table
+            movieList.forEach(movie => {
+                const row = document.createElement('tr');
+                
+                // Movie Poster
+                const posterCell = document.createElement('td');
+                const posterImage = document.createElement('img');
+                posterImage.src = `https://image.tmdb.org/t/p/w200${movie.poster_path}`;
+                posterImage.alt = movie.title;
+                posterImage.style.width = '100px'; // Set fixed width for the image
+                posterCell.appendChild(posterImage);
+                
+                // Movie Title
+                const titleCell = document.createElement('td');
+                titleCell.textContent = movie.title;
+
+                // Movie Release Date
+                const releaseDateCell = document.createElement('td');
+                releaseDateCell.textContent = movie.release_date;
+
+                // Movie Overview
+                const overviewCell = document.createElement('td');
+                overviewCell.textContent = movie.overview;
+
+                // Append cells to the row
+                row.appendChild(posterCell);
+                row.appendChild(titleCell);
+                row.appendChild(releaseDateCell);
+                row.appendChild(overviewCell);
+
+                // Append the row to the table body
+                movieTableBody.appendChild(row);
+            });
+        })
+        .catch(error => {
+            console.error('Error fetching movie data:', error);
+        });
+}
+
     </script>
-
-
-
-
 </body>
 
 </html>
-
-
-
-correct the alignment 

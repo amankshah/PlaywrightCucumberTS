@@ -7,6 +7,7 @@ import { getEnvVariable } from '../envReader';
 import { AccountCreatedPage } from "../pages/accountCreated.page";
 import { HomePage } from "../pages/home.page";
 import { ProductPage } from "../pages/product.page";
+import {AutomationTestingPage} from "../pages/demo.page";
 
 export class PageObjectManager {
     private Page: Page;
@@ -17,7 +18,9 @@ export class PageObjectManager {
     private homePage?: HomePage;
     private productPage?: ProductPage;
     private accountCreatedPage?: AccountCreatedPage;
+    private automationTestingPage?: AutomationTestingPage;
     private pageElements: typeof pageElements;
+
 
     constructor(Page: Page) {
         this.Page = Page;
@@ -37,6 +40,7 @@ export class PageObjectManager {
         }
         return this.homePage;
     }
+
     getProductPage(): ProductPage {
         if (!this.productPage) {
             this.productPage = new ProductPage(this.Page);
@@ -71,5 +75,11 @@ export class PageObjectManager {
             this.accountInformation = new AccountInformation(this.Page);
         }
         return this.accountInformation;
+    }
+    getAutomationTestingPage(): AutomationTestingPage {
+        if (!this.automationTestingPage) {
+            this.automationTestingPage = new AutomationTestingPage(this.Page);
+        }
+        return this.automationTestingPage;
     }
 }
