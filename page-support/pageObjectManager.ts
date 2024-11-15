@@ -5,12 +5,17 @@ import { AccountInformation } from "../pages/accountInformation.page";
 import { pageElements } from "../page-support/PageElements";
 import { getEnvVariable } from '../envReader';
 import { AccountCreatedPage } from "../pages/accountCreated.page";
+import { HomePage } from "../pages/home.page";
+import { ProductPage } from "../pages/product.page";
 
 export class PageObjectManager {
     private Page: Page;
-    private loginPage?: LoginPage; // Lazy initialization
+
+    private loginPage?: LoginPage;
     private signUpPage?: SignUpPage;
     private accountInformation?: AccountInformation;
+    private homePage?: HomePage;
+    private productPage?: ProductPage;
     private accountCreatedPage?: AccountCreatedPage;
     private pageElements: typeof pageElements;
 
@@ -25,6 +30,18 @@ export class PageObjectManager {
             this.loginPage = new LoginPage(this.Page);
         }
         return this.loginPage;
+    }
+    getHomePage(): HomePage {
+        if (!this.homePage) {
+            this.homePage = new HomePage(this.Page);
+        }
+        return this.homePage;
+    }
+    getProductPage(): ProductPage {
+        if (!this.productPage) {
+            this.productPage = new ProductPage(this.Page);
+        }
+        return this.productPage;
     }
 
     getPageElements(): typeof pageElements {

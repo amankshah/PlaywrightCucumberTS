@@ -130,7 +130,7 @@ dist
 .pnp.*
 
 
-/images/
+/image/
 /allure-results/
 /allure-report/
 

@@ -105,4 +105,23 @@ export const pageElements = {
         EXPECTED_SECTION_HEADER: "Account Created!",
     
     },
+
+    ProductPage : {
+        // Page URL
+        url: "https://automationexercise.com/products",
+    
+        // Main product page elements
+        allProductTextLabel: ".title",
+        searchBarInput: "#search_product",
+        searchButton: "#submit_search",
+        productCard: ".col-sm-4 .single-products",
+    
+        // Searched product elements
+        searchedProductPageLabel: ".title",
+        searchedProductCard: ".col-sm-4 .single-products",
+    
+        // Modal elements
+        modalPopupAddToCartButton: ".modal-body a",
+        modalContinueShoppingButton: ".close-modal"
+    },
 }
