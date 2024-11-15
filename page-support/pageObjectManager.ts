@@ -76,7 +76,7 @@ export class PageObjectManager {
         }
         return this.accountInformation;
     }
-    getAutomationTestingPage(): AutomationTestingPage {
+   getDemoPage(): AutomationTestingPage {
         if (!this.automationTestingPage) {
             this.automationTestingPage = new AutomationTestingPage(this.Page);
         }

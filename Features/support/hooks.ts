@@ -70,7 +70,7 @@ After(async function({ result, pickle }) {
   
   // If the scenario fails, take a screenshot and attach it
   if (result?.status === Status.FAILED) {
-    const screenshotPath = `.image/failed-screenshots/${pickle.name.replace(/ /g, '_')}-failed.png`;
+    const screenshotPath = `image/failed-screenshots/${pickle.name.replace(/ /g, '_')}-failed.png`;
     const img = await page.screenshot({ path: screenshotPath, type: "png" });
     this.attach(img, "image/png");
   }

@@ -1,5 +1,5 @@
 
-
+const demoimage = "../../demoimagetoUplaod.png";
 
 export const testData = {
 
@@ -23,6 +23,20 @@ export const testData = {
         "ConfirmPassword": "aman@2024"
 },
 
-   
+   "demo": {
+    "FirstName": "Aman",
+    "LastName": "Shah",
+    "Email": "aman@ltim.com",
+    "Password": "aman@2024",
+    "ConfirmPassword": "aman@2024",
+    "searchTerm": "Aman",
+    "sliderValue": 50,
+    "radioOption": "Option1",
+    "checkboxOption": "Option1",
+    "dropdownOption": "Option1",
+    "uploadFile":"demoimage"
+    
+
+   }
 
 }

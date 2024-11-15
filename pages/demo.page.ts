@@ -1,6 +1,8 @@
 import { Page, Locator, expect } from '@playwright/test';
 import exp from 'constants';
 import dotenv from 'dotenv';
+import { testData } from '../page-support/testData';
+import path from 'path';
 dotenv.config();
 
 
@@ -42,10 +44,12 @@ export class AutomationTestingPage {
   private movieTable: Locator;
   private movieList: Locator;
   private hurrayMessage: Locator;
+  private pageHeader: Locator;
 
   constructor(page: Page) {
     this.page = page;
     
+    this.pageHeader = page.locator("div[class='container mt-5'] h1")
     // Form elements
     this.searchInput = page.locator('#searchInput');
     this.emailInput = page.locator('#email');
@@ -96,6 +100,13 @@ export class AutomationTestingPage {
     }
   }
 
+  async verifyPageHeader() {
+    try {
+      await expect(this.pageHeader).toHaveText('Automation Testing Elements');
+    } catch (error) {
+      console.error(error);
+    }
+  }
   // Method to fill the search input field
   async fillSearchInput(searchTerm: string) {
     await this.searchInput.fill(searchTerm);
@@ -157,6 +168,12 @@ export class AutomationTestingPage {
     await item.dragTo(this.dropZone);
   }
 
+  async dropAllThreeItems() {
+    await this.dragAndDropItem(this.dragItem1);
+    await this.dragAndDropItem(this.dragItem2);
+    await this.dragAndDropItem(this.dragItem3);
+  }
+
   // Method to open the modal popup
   async openModal() {
     await this.modalOpenButton.click();
@@ -175,19 +192,23 @@ export class AutomationTestingPage {
 // Method to drag and drop files to the drop zone
 async dragAndDropFilesToDropZone(filePaths: string[]) {
    
-    for (const filePath of filePaths) {
-  
-      await this.fileElem.setInputFiles(filePath);
-  
-  
-      await this.browseBtn.click();
-  
-  
-      const fileName = filePath.split('/').pop() || filePath;
-  
-  
-      await expect(this.fileList.locator('p')).toContainText(fileName);
-    }
+  for (const filePath of filePaths) {
+    // Resolve the file path relative to the project directory
+    const resolvedFilePath = path.resolve(__dirname, filePath);
+
+    await this.fileElem.setInputFiles(resolvedFilePath);
+
+    await this.browseBtn.click();
+
+    const fileName = resolvedFilePath.split(path.sep).pop() || resolvedFilePath;
+
+    await expect(this.fileList.locator('p')).toContainText(fileName);
+}
+  }
+  async verifyFileName() {
+    const fileName = testData.demo.uploadFile;
+    const fileElement = this.fileList.locator('p');
+    await expect(fileElement).toContainText(fileName);
   }
   
 
